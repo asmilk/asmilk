@@ -3,10 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.mybluemix.sample</groupId>
-	<artifactId>TomcatHelloWorldApp</artifactId>
-	<packaging>war</packaging>
+	<groupId>net.mybluemix</groupId>
+	<artifactId>asmilk</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -25,15 +30,16 @@
 				<version>2.6</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<warName>TomcatHelloWorldApp</warName>
+					<warName>${project.artifactId}</warName>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>
