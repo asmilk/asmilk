@@ -5,11 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+<title><fmt:message key="index.title" /></title>
 </head>
 <body>
 	index.jsp
 	<fmt:message key="index.title" />
-	<img alt="newapp-icon" src="/images/newapp-icon.png" />
+	<img alt="newapp-icon" src="/image/newapp-icon.png" />
 </body>
 </html>

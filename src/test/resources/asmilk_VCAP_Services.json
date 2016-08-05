@@ -1,0 +1,11 @@
+{
+  "elephantsql" : [ {
+    "name" : "asElephantSQL0",
+    "label" : "elephantsql",
+    "plan" : "turtle",
+    "credentials" : {
+      "uri" : "postgres://oghfqmrb:L4TUJJ8pFTHfzkJr5hjqcDbHGbMiox7X@jumbo.db.elephantsql.com:5432/oghfqmrb",
+      "max_conns" : "5"
+    }
+  } ]
+}

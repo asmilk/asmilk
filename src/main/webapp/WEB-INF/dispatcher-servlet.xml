@@ -1,28 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans classpath:spring-beans.xsd 
 	http://www.springframework.org/schema/context classpath:spring-context.xsd 
-	http://www.springframework.org/schema/mvc classpath:spring-mvc.xsd">
+	http://www.springframework.org/schema/mvc classpath:spring-mvc.xsd 
+	http://www.springframework.org/schema/jee classpath:spring-jee.xsd 
+	http://www.springframework.org/schema/tx classpath:spring-tx.xsd 
+	http://www.springframework.org/schema/data/jpa classpath:spring-jpa.xsd ">
 
-	<context:component-scan base-package="net.mybluemix.asmilk.web" />
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:component-scan base-package="net.mybluemix.asmilk" />
+	<context:annotation-config />
+
 	<mvc:annotation-driven />
+	<mvc:resources mapping="/image/**" location="/WEB-INF/image/" cache-period="31556926" />
+	<mvc:resources mapping="/script/**" location="/WEB-INF/script/" cache-period="31556926" />
+	<mvc:resources mapping="/style/**" location="/WEB-INF/style/" cache-period="31556926" />
 	<mvc:default-servlet-handler />
 
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/view/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
 
-	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basenames">
-			<list>
-				<value>message</value>
-			</list>
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+		p:basename="message" />
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+		p:driverClass="${jdbc.driver}" p:jdbcUrl="${jdbc.url}" p:user="${jdbc.username}" p:password="${jdbc.password}"
+		p:minPoolSize="${c3p0.min_size}" p:maxPoolSize="${c3p0.max_size}" p:initialPoolSize="${c3p0.init_size}" />
+
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		p:database="${jpa_vendor_adapter.database}" p:generateDdl="true" p:showSql="true" />
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:dataSource-ref="dataSource" p:packagesToScan="net.mybluemix.asmilk.domain"
+		p:jpaVendorAdapter-ref="jpaVendorAdapter">
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+			</props>
 		</property>
 	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+		p:entityManagerFactory-ref="entityManagerFactory" />
+
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="false" />
+
+	<jpa:repositories base-package="net.mybluemix.asmilk.repository"
+		entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
 
 </beans>
