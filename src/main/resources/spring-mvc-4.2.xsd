@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<xsd:schema xmlns="http://www.springframework.org/schema/mvc" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:tool="http://www.springframework.org/schema/tool"
-	targetNamespace="http://www.springframework.org/schema/mvc" elementFormDefault="qualified"
-	attributeFormDefault="unqualified">
+<xsd:schema xmlns="http://www.springframework.org/schema/mvc"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:beans="http://www.springframework.org/schema/beans"
+		xmlns:tool="http://www.springframework.org/schema/tool"
+		targetNamespace="http://www.springframework.org/schema/mvc"
+		elementFormDefault="qualified"
+		attributeFormDefault="unqualified">
 
-	<xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="classpath:spring-beans.xsd" />
-	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="classpath:spring-tool.xsd" />
+	<xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="classpath:spring-beans-4.2.xsd"/>
+	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="classpath:spring-tool-4.2.xsd"/>
 
 	<xsd:element name="annotation-driven">
 		<xsd:annotation>
-			<xsd:documentation
-				source="java:org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"><![CDATA[
+			<xsd:documentation source="java:org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"><![CDATA[
 	Configures the annotation-driven Spring MVC Controller programming model.
 	Note that this tag works in Web MVC only, not in Portlet MVC!
 
@@ -139,8 +141,7 @@
 									]]></xsd:documentation>
 									<xsd:appinfo>
 										<tool:annotation kind="ref">
-											<tool:expected-type
-												type="java:org.springframework.web.method.support.HandlerMethodArgumentResolver" />
+											<tool:expected-type type="java:org.springframework.web.method.support.HandlerMethodArgumentResolver"/>
 										</tool:annotation>
 									</xsd:appinfo>
 								</xsd:annotation>
@@ -172,8 +173,7 @@
 									]]></xsd:documentation>
 									<xsd:appinfo>
 										<tool:annotation kind="ref">
-											<tool:expected-type
-												type="java:org.springframework.web.method.support.HandlerMethodReturnValueHandler" />
+											<tool:expected-type type="java:org.springframework.web.method.support.HandlerMethodReturnValueHandler"/>
 										</tool:annotation>
 									</xsd:appinfo>
 								</xsd:annotation>
@@ -237,7 +237,7 @@
 								]]></xsd:documentation>
 								<xsd:appinfo>
 									<tool:annotation kind="ref">
-										<tool:expected-type type="java:org.springframework.core.task.AsyncTaskExecutor" />
+										<tool:expected-type type="java:org.springframework.core.task.AsyncTaskExecutor"/>
 									</tool:annotation>
 								</xsd:appinfo>
 							</xsd:annotation>
@@ -264,7 +264,7 @@
 					]]></xsd:documentation>
 					<xsd:appinfo>
 						<tool:annotation kind="ref">
-							<tool:expected-type type="java:org.springframework.core.convert.ConversionService" />
+							<tool:expected-type type="java:org.springframework.core.convert.ConversionService"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>
@@ -278,7 +278,7 @@
 					]]></xsd:documentation>
 					<xsd:appinfo>
 						<tool:annotation kind="ref">
-							<tool:expected-type type="java:org.springframework.validation.Validator" />
+							<tool:expected-type type="java:org.springframework.validation.Validator"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>
@@ -294,7 +294,7 @@
 					]]></xsd:documentation>
 					<xsd:appinfo>
 						<tool:annotation kind="ref">
-							<tool:expected-type type="java:org.springframework.web.accept.ContentNegotiationManager" />
+							<tool:expected-type type="java:org.springframework.web.accept.ContentNegotiationManager"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>
@@ -308,7 +308,7 @@
 					]]></xsd:documentation>
 					<xsd:appinfo>
 						<tool:annotation kind="ref">
-							<tool:expected-type type="java:org.springframework.validation.MessageCodesResolver" />
+							<tool:expected-type type="java:org.springframework.validation.MessageCodesResolver"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>
@@ -346,7 +346,7 @@
 	to the file name, e.g. "styles/main-e36d2e05253c6c7085a91522ce43a0b4.css".
 			]]></xsd:documentation>
 		</xsd:annotation>
-		<xsd:attribute name="patterns" type="xsd:string" use="required" />
+		<xsd:attribute name="patterns" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="fixed-version-strategy">
@@ -356,8 +356,8 @@
 	e.g. reduced SHA, version name, release date, etc.
 			]]></xsd:documentation>
 		</xsd:annotation>
-		<xsd:attribute name="version" type="xsd:string" use="required" />
-		<xsd:attribute name="patterns" type="xsd:string" use="required" />
+		<xsd:attribute name="version" type="xsd:string" use="required"/>
+		<xsd:attribute name="patterns" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="resource-version-strategy">
@@ -382,7 +382,7 @@
 				</xsd:annotation>
 			</xsd:element>
 		</xsd:choice>
-		<xsd:attribute name="patterns" type="xsd:string" use="required" />
+		<xsd:attribute name="patterns" type="xsd:string" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="version-resolver">
@@ -394,9 +394,9 @@
 			]]></xsd:documentation>
 		</xsd:annotation>
 		<xsd:choice maxOccurs="unbounded">
-			<xsd:element type="content-version-strategy" name="content-version-strategy" />
-			<xsd:element type="fixed-version-strategy" name="fixed-version-strategy" />
-			<xsd:element type="resource-version-strategy" name="version-strategy" />
+			<xsd:element type="content-version-strategy" name="content-version-strategy"/>
+			<xsd:element type="fixed-version-strategy" name="fixed-version-strategy"/>
+			<xsd:element type="resource-version-strategy" name="version-strategy"/>
 		</xsd:choice>
 	</xsd:complexType>
 
@@ -410,7 +410,7 @@
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:choice maxOccurs="unbounded">
-				<xsd:element type="version-resolver" name="version-resolver" />
+				<xsd:element type="version-resolver" name="version-resolver"/>
 				<xsd:element ref="beans:bean">
 					<xsd:annotation>
 						<xsd:documentation source="org.springframework.web.servlet.resource.ResourceResolver"><![CDATA[
@@ -469,9 +469,8 @@
 			]]></xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="resolvers" type="resource-resolvers" minOccurs="0" maxOccurs="1" />
-			<xsd:element name="transformers" type="resource-transformers" minOccurs="0"
-				maxOccurs="1" />
+			<xsd:element name="resolvers" type="resource-resolvers" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="transformers" type="resource-transformers" minOccurs="0" maxOccurs="1"/>
 		</xsd:sequence>
 		<xsd:attribute name="resource-cache" type="xsd:boolean" use="required">
 			<xsd:annotation>
@@ -586,27 +585,12 @@
 					]]></xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="stale-while-revalidate" type="xsd:int" use="optional">
-			<xsd:annotation>
-				<xsd:documentation><![CDATA[
-	Adds a "stale-while-revalidate" directive in the Cache-Control header.
-	This indicates that caches may serve the response after it becomes stale up to the given number of seconds.
-					]]></xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="stale-if-error" type="xsd:int" use="optional">
-			<xsd:annotation>
-				<xsd:documentation><![CDATA[
-	Adds a "s-maxage" directive in the Cache-Control header.
-	This directive has the same meaning as the "max-age" directive, except it only applies to shared caches.
-					]]></xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
 	</xsd:complexType>
 
 	<xsd:element name="resources">
 		<xsd:annotation>
-			<xsd:documentation source="java:org.springframework.web.servlet.resource.ResourceHttpRequestHandler"><![CDATA[
+			<xsd:documentation
+				source="java:org.springframework.web.servlet.resource.ResourceHttpRequestHandler"><![CDATA[
 	Configures a handler for serving static resources such as images, js, and, css files with cache headers
 	optimized for efficient loading in a web browser. Allows resources to be served out of any path that is
 	reachable via Spring's Resource handling.
@@ -614,8 +598,8 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="cache-control" type="cache-control" minOccurs="0" maxOccurs="1" />
-				<xsd:element name="resource-chain" type="resource-chain" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="cache-control" type="cache-control" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="resource-chain" type="resource-chain" minOccurs="0" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="mapping" use="required" type="xsd:string">
 				<xsd:annotation>
@@ -777,7 +761,7 @@
 					]]></xsd:documentation>
 					<xsd:appinfo>
 						<tool:annotation kind="ref">
-							<tool:expected-type type="java:org.springframework.util.PathMatcher" />
+							<tool:expected-type type="java:org.springframework.util.PathMatcher"/>
 						</tool:annotation>
 					</xsd:appinfo>
 				</xsd:annotation>
@@ -968,7 +952,7 @@
 				]]></xsd:documentation>
 				<xsd:appinfo>
 					<tool:annotation kind="ref">
-						<tool:expected-type type="java:java.lang.Class" />
+						<tool:expected-type type="java:java.lang.Class"/>
 					</tool:annotation>
 				</xsd:appinfo>
 			</xsd:annotation>
@@ -1011,73 +995,83 @@
 						]]></xsd:documentation>
 					</xsd:annotation>
 				</xsd:element>
-				<xsd:element name="jsp" type="urlViewResolverType">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+					<xsd:element name="jsp" type="urlViewResolverType">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register an InternalResourceViewResolver bean for JSP rendering.
 	By default, "/WEB-INF/" is registered as a view name prefix and ".jsp" as a suffix.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="tiles" type="urlViewResolverType">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="tiles" type="urlViewResolverType">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register a TilesViewResolver based on Tiles 3.x.
 	To configure Tiles you must also add a top-level <mvc:tiles-configurer> element
 	or declare a TilesConfigurer bean.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="freemarker" type="urlViewResolverType">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="freemarker" type="urlViewResolverType">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register a FreeMarkerViewResolver.
 	By default, ".ftl" is configured as a view name suffix.
 	To configure FreeMarker you must also add a top-level <mvc:freemarker-configurer> element
 	or declare a FreeMarkerConfigurer bean.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="groovy" type="urlViewResolverType">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="velocity" type="urlViewResolverType">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
+	Register a VelocityViewResolver.
+	By default, ".vm" is configured as a view name suffix.
+	To configure Velocity you must also add a top-level <mvc:velocity-configurer> element
+	or declare a VelocityConfigurer bean.
+							]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="groovy" type="urlViewResolverType">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register a GroovyMarkupViewResolver.
 	By default, ".tpl" is configured as a view name suffix.
 	To configure the Groovy markup template engine you must also add a top-level <mvc:groovy-configurer> element
 	or declare a GroovyMarkupConfigurer bean.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="script-template" type="urlViewResolverType">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="script-template" type="urlViewResolverType">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register a ScriptTemplateViewResolver.
 	To configure the Script engine you must also add a top-level <mvc:script-template-configurer> element
 	or declare a ScriptTemplateConfigurer bean.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="bean-name" maxOccurs="1">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="bean-name" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register a BeanNameViewResolver bean.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element ref="beans:bean">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="beans:bean">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register a ViewResolver as a direct bean declaration.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element ref="beans:ref">
-					<xsd:annotation>
-						<xsd:documentation><![CDATA[
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="beans:ref">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
 	Register a ViewResolver through references to an existing bean declaration.
 							]]></xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
+						</xsd:annotation>
+					</xsd:element>
 			</xsd:choice>
 			<xsd:attribute name="order" type="xsd:int">
 				<xsd:annotation>
@@ -1176,6 +1170,24 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="velocity-configurer">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	Configure Velocity for view resolution by registering a VelocityConfigurer bean.
+	This is a shortcut alternative to declaring a VelocityConfigurer bean directly.
+			]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="resource-loader-path" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The Velocity resource loader path via a Spring resource location.
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
 	<xsd:element name="groovy-configurer">
 		<xsd:annotation>
 			<xsd:documentation><![CDATA[
@@ -1219,7 +1231,7 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="script" minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="script" minOccurs="0" maxOccurs="unbounded">
 					<xsd:complexType>
 						<xsd:attribute name="location" type="xsd:string" use="required">
 							<xsd:annotation>

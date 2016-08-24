@@ -1,10 +1,12 @@
 package net.mybluemix.asmilk.test;
 
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.orm.jpa.vendor.Database;
+
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
+
+import net.minidev.json.JSONArray;
 
 public class Tester {
 
@@ -16,28 +18,14 @@ public class Tester {
 	}
 
 	public void test() {
-		// DocumentContext docCtx =
-		// JsonPath.parse(this.getClass().getResourceAsStream("/asmilk_VCAP_Services.json"));
-		// JSONArray array = docCtx.read("$..label");
-		// System.out.println(array.get(0));
-
-		Properties credentials = new Properties();
-		credentials.put("aaa", 111);
-		credentials.put("bbb", 222);
-		credentials.put("ccc", 333);
-		credentials.put("ddd", 444);
-
-		System.out.println(credentials);
-
-		System.out.println(System.getProperties());
-
-		System.setProperty("eee", "555");
-
-		System.out.println(System.getProperties());
-
-		LOG.info("{}: {}", "aaa", "111");
+		DocumentContext docCtx = JsonPath.parse(this.getClass().getResourceAsStream("/asmilk_VCAP_Services.json"));
+		JSONArray array = docCtx.read("$..label");
+		LOG.info(array.get(0).toString());
 		
-		System.out.println(Database.MYSQL.name());
+		array = docCtx.read("$..label[0]");
+		
+		LOG.info("" + array.size());
+		
 	}
 
 }

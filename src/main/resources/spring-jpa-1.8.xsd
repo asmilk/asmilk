@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xsd:schema xmlns="http://www.springframework.org/schema/data/jpa" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:tool="http://www.springframework.org/schema/tool" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:repository="http://www.springframework.org/schema/data/repository" targetNamespace="http://www.springframework.org/schema/data/jpa"
+<xsd:schema xmlns="http://www.springframework.org/schema/data/jpa"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tool="http://www.springframework.org/schema/tool"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:repository="http://www.springframework.org/schema/data/repository"
+	targetNamespace="http://www.springframework.org/schema/data/jpa"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 
-	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="classpath:spring-tool.xsd" />
-	<xsd:import namespace="http://www.springframework.org/schema/context" schemaLocation="classpath:spring-context.xsd" />
+	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="classpath:spring-tool-4.2.xsd" />
+	<xsd:import namespace="http://www.springframework.org/schema/context" schemaLocation="classpath:spring-context-4.2.xsd" />
 	<xsd:import namespace="http://www.springframework.org/schema/data/repository"
-		schemaLocation="classpath:spring-repository.xsd" />
+		schemaLocation="classpath:spring-repository-1.8.xsd" />
 
 	<xsd:element name="repositories">
 		<xsd:complexType>

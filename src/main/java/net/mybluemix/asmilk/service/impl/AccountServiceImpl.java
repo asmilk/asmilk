@@ -34,4 +34,10 @@ public class AccountServiceImpl implements AccountService {
 		return this.getAccountRepository().findOne(id);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Account findMax() {
+		return this.getAccountRepository().findMax();
+	}
+
 }

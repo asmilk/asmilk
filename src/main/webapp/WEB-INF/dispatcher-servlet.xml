@@ -5,12 +5,12 @@
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
-	http://www.springframework.org/schema/beans classpath:spring-beans.xsd 
-	http://www.springframework.org/schema/context classpath:spring-context.xsd 
-	http://www.springframework.org/schema/mvc classpath:spring-mvc.xsd 
-	http://www.springframework.org/schema/jee classpath:spring-jee.xsd 
-	http://www.springframework.org/schema/tx classpath:spring-tx.xsd 
-	http://www.springframework.org/schema/data/jpa classpath:spring-jpa.xsd ">
+	http://www.springframework.org/schema/beans classpath:spring-beans-4.2.xsd 
+	http://www.springframework.org/schema/context classpath:spring-context-4.2.xsd 
+	http://www.springframework.org/schema/mvc classpath:spring-mvc-4.2.xsd 
+	http://www.springframework.org/schema/jee classpath:spring-jee-4.2.xsd 
+	http://www.springframework.org/schema/tx classpath:spring-tx-4.2.xsd 
+	http://www.springframework.org/schema/data/jpa classpath:spring-jpa-1.8.xsd ">
 
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	<context:component-scan base-package="net.mybluemix.asmilk" />

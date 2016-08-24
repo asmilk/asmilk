@@ -7,5 +7,7 @@ public interface AccountService {
 	Account save(Account account);
 
 	Account findOne(Long id);
+	
+	Account findMax();
 
 }

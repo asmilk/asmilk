@@ -55,7 +55,7 @@ public class WebConfigListener implements ServletContextListener {
 		if (null != services && !services.equals("")) {
 			DocumentContext docCtx = JsonPath.parse(services);
 			String label = String.valueOf(docCtx.read("$..label", JSONArray.class).get(0));
-			LOG.info("DataSourceLabel: {}", label);
+			LOG.info("Data Source Label: {}", label);
 			switch (label) {
 			case "elephantsql":
 				this.setDataSourceRegister(new ElephantSQLRegister());
