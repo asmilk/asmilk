@@ -1,14 +1,16 @@
+---
 applications:
 - path: target/asmilk.war
   memory: 512M
   instances: 1
   domain: mybluemix.net
-  name: asmilk0
-  host: asmilk0
+  name: asmilk
+  host: asmilk
   disk_quota: 1024M
   services:
-  - asElephantSQL0
+  - asElephantSQL
   buildpack: java_buildpack
   env:
     JBP_CONFIG_IBMJDK: '[version: 1.8.+]'
-    JBP_CONFIG_LIBERTY: 'app_archive: {features: [el-3.0, jdbc-4.1, jndi-1.0, jpa-2.1, jsonp-1.0, jsp-2.3, servlet-3.1, websocket-1.1]}'
+    JBP_CONFIG_LIBERTY: 'app_archive: {features: [el-3.0, jdbc-4.1, jndi-1.0, jpa-2.1,
+      jsonp-1.0, jsp-2.3, servlet-3.1, websocket-1.1]}'

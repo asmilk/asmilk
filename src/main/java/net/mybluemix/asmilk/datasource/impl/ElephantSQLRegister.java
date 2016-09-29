@@ -3,6 +3,7 @@ package net.mybluemix.asmilk.datasource.impl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hibernate.dialect.PostgreSQL92Dialect;
 import org.springframework.orm.jpa.vendor.Database;
 
 import com.jayway.jsonpath.DocumentContext;
@@ -33,7 +34,8 @@ public class ElephantSQLRegister extends DataSourceRegister {
 
 			String url = String.format(FORMAT_URL, hostname, port, database);
 
-			super.setSystemProperty(Database.POSTGRESQL, DRIVER, url, username, password, C3P0_MAX_SIZE);
+			super.setSystemProperty(Database.POSTGRESQL, PostgreSQL92Dialect.class, DRIVER, url, username, password,
+					C3P0_MAX_SIZE);
 		}
 	}
 

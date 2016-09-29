@@ -1,5 +1,6 @@
 package net.mybluemix.asmilk.datasource.impl;
 
+import org.hibernate.dialect.MySQL5InnoDBDialect;
 import org.springframework.orm.jpa.vendor.Database;
 
 import com.jayway.jsonpath.DocumentContext;
@@ -30,7 +31,8 @@ public class ClearDBRegister extends DataSourceRegister {
 
 		String url = String.format(FORMAT_URL, hostname, port, database);
 
-		super.setSystemProperty(Database.MYSQL, DRIVER, url, username, password, C3P0_MAX_SIZE);
+		super.setSystemProperty(Database.MYSQL, MySQL5InnoDBDialect.class, DRIVER, url, username, password,
+				C3P0_MAX_SIZE);
 	}
 
 }

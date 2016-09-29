@@ -3,20 +3,31 @@
 	xmlns:c="http://www.springframework.org/schema/c" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans classpath:spring-beans-4.2.xsd 
 	http://www.springframework.org/schema/context classpath:spring-context-4.2.xsd 
 	http://www.springframework.org/schema/mvc classpath:spring-mvc-4.2.xsd 
 	http://www.springframework.org/schema/jee classpath:spring-jee-4.2.xsd 
 	http://www.springframework.org/schema/tx classpath:spring-tx-4.2.xsd 
+	http://www.springframework.org/schema/task classpath:spring-task-4.2.xsd 
 	http://www.springframework.org/schema/data/jpa classpath:spring-jpa-1.8.xsd ">
 
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	<context:component-scan base-package="net.mybluemix.asmilk" />
 	<context:annotation-config />
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="objectMapper" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
+		p:indentOutput="true" p:simpleDateFormat="yyyy-MM-dd" />
+
 	<mvc:resources mapping="/image/**" location="/WEB-INF/image/" cache-period="31556926" />
 	<mvc:resources mapping="/script/**" location="/WEB-INF/script/" cache-period="31556926" />
 	<mvc:resources mapping="/style/**" location="/WEB-INF/style/" cache-period="31556926" />
@@ -40,9 +51,10 @@
 		p:jpaVendorAdapter-ref="jpaVendorAdapter">
 		<property name="jpaProperties">
 			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.generate_statistics">false</prop>
 			</props>
 		</property>
 	</bean>
@@ -55,5 +67,9 @@
 
 	<jpa:repositories base-package="net.mybluemix.asmilk.repository"
 		entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
+
+	<task:annotation-driven executor="taskExecutor" scheduler="taskScheduler" />
+	<task:executor id="taskExecutor" pool-size="5" />
+	<task:scheduler id="taskScheduler" pool-size="10" />
 
 </beans>

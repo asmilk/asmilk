@@ -8,15 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.google.api.client.util.Key;
+
 @Entity
 public class Account implements Serializable {
 
-	private static final long serialVersionUID = 472675602057340616L;
+	private static final long serialVersionUID = -8992119899897772408L;
 
 	@Id
+	@Key
 	@GeneratedValue(strategy = IDENTITY)
 	private long id;
 
+	@Key
 	private String name;
 
 	public long getId() {
