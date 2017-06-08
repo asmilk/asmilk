@@ -1,8 +1,10 @@
 package net.mybluemix.asmilk.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import net.mybluemix.asmilk.domain.Account;
 import net.mybluemix.asmilk.repository.AccountRepository;
@@ -12,32 +14,41 @@ import net.mybluemix.asmilk.service.AccountService;
 public class AccountServiceImpl implements AccountService {
 
 	@Autowired
-	AccountRepository accountRepository;
-
-	public AccountRepository getAccountRepository() {
-		return accountRepository;
-	}
-
-	public void setAccountRepository(AccountRepository accountRepository) {
-		this.accountRepository = accountRepository;
-	}
+	private AccountRepository accountRepository;
 
 	@Override
-	@Transactional
 	public Account save(Account account) {
-		return this.getAccountRepository().save(account);
+		return this.accountRepository.save(account);
+	}
+	
+	@Override
+	public void delete(Long id) {
+		this.accountRepository.delete(id);
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Account findOne(Long id) {
-		return this.getAccountRepository().findOne(id);
+		return this.accountRepository.findOne(id);
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Account findMax() {
-		return this.getAccountRepository().findMax();
+		return this.accountRepository.findMax();
+	}
+
+	@Override
+	public Page<Account> findAll(Pageable pageable) {
+		return this.accountRepository.findAll(pageable);
+	}
+	
+	@Override
+	public Page<Account> findAll(Example<Account> example, Pageable pageable) {
+		return this.accountRepository.findAll(example, pageable);
+	}
+
+	@Override
+	public void sysGC() {
+		this.accountRepository.sysGC();
 	}
 
 }

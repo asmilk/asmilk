@@ -2,3 +2,27 @@ img.qrcode {
 	width: 200px;
 	height: 200px;
 }
+
+div#message span.error {
+	color: red;
+	display: block;
+}
+
+form label {
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+}
+
+form div {
+	margin: 5px;
+}
+
+div.paging span {
+	display: inline-block;
+	width: 80px;
+}
+div.paging a {
+	display: inline-block;
+	width: 50px;
+}

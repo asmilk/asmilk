@@ -23,7 +23,7 @@ public class WechatController {
 	private static final Logger LOG = LoggerFactory.getLogger(WechatController.class);
 
 	@Autowired
-	WechatService wechatService;
+	private WechatService wechatService;
 
 	// @RequestMapping(path = "/login", method = GET, headers =
 	// "Accept=application/json")

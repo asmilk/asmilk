@@ -7,8 +7,8 @@
 	targetNamespace="http://www.springframework.org/schema/data/jpa"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 
-	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="classpath:spring-tool-4.2.xsd" />
-	<xsd:import namespace="http://www.springframework.org/schema/context" schemaLocation="classpath:spring-context-4.2.xsd" />
+	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="classpath:spring-tool-4.3.xsd" />
+	<xsd:import namespace="http://www.springframework.org/schema/context" schemaLocation="classpath:spring-context-4.3.xsd" />
 	<xsd:import namespace="http://www.springframework.org/schema/data/repository"
 		schemaLocation="classpath:spring-repository-1.8.xsd" />
 

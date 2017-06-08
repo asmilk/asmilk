@@ -1,35 +1,31 @@
 package net.mybluemix.asmilk.domain;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static org.hibernate.annotations.CacheConcurrencyStrategy.NONSTRICT_READ_WRITE;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.google.api.client.util.Key;
 
+import net.mybluemix.asmilk.auditing.AbstractAuditingEntity;
+
 @Entity
-public class Account implements Serializable {
+@Cacheable
+@Cache(usage = NONSTRICT_READ_WRITE)
+public class Account extends AbstractAuditingEntity implements Serializable {
 
-	private static final long serialVersionUID = -8992119899897772408L;
-
-	@Id
-	@Key
-	@GeneratedValue(strategy = IDENTITY)
-	private long id;
+	private static final long serialVersionUID = 2353899894673301524L;
 
 	@Key
+	@Length(min = 5, max = 10)
+	@NotBlank
 	private String name;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -41,7 +37,7 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", name=" + name + "]";
+		return super.toString() + "; Account [name=" + name + "]";
 	}
 
 }

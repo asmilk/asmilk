@@ -1,0 +1,111 @@
+2017-01-16 17:39:43,070 DEBUG 35 org.springframework.web.filter.RequestContextFilter.initContextHolders(RequestContextFilter.java:114) - Bound request context to thread: org.apache.catalina.connector.RequestFacade@19caaed
+2017-01-16 17:39:43,071 TRACE 35 org.springframework.web.servlet.FrameworkServlet.initContextHolders(FrameworkServlet.java:1050) - Bound request context to thread: SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.context.HttpSessionSecurityContextRepository$Servlet3SaveToSessionRequestWrapper@1a9cda6]
+2017-01-16 17:39:43,071 DEBUG 35 org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:861) - DispatcherServlet with name 'dispatcher' processing POST request for [/account/save]
+2017-01-16 17:39:43,071 TRACE 35 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping@1461390] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:43,072 TRACE 35 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@19bf387]
+2017-01-16 17:39:46,605 INFO  35 net.mybluemix.asmilk.web.AccountController.save(AccountController.java:46) - !!!AccountController.save()!!!
+2017-01-16 17:39:46,605 INFO  35 net.mybluemix.asmilk.web.AccountController.save(AccountController.java:47) - account: AbstractAuditingEntity [id=null, version=null]; Account [name=fdsfsdf]
+2017-01-16 17:39:46,671 INFO  35 net.mybluemix.asmilk.auditing.SpringSecurityAuditorAware.getCurrentAuditor(SpringSecurityAuditorAware.java:22) - username: user
+Hibernate: 
+    insert 
+    into
+        Account
+        (id, CREATED_BY, CREATED_DATE, LAST_MODIFIED_BY, LAST_MODIFIED_DATE, version, name) 
+    values
+        (default, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    
+values
+    identity_val_local()
+2017-01-16 17:39:47,592 INFO  35 org.hibernate.engine.internal.StatisticalLoggingSessionEventListener.end(StatisticalLoggingSessionEventListener.java:258) - Session Metrics {
+    387242 nanoseconds spent acquiring 2 JDBC connections;
+    199651 nanoseconds spent releasing 2 JDBC connections;
+    25301643 nanoseconds spent preparing 2 JDBC statements;
+    4909988 nanoseconds spent executing 2 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    13515976 nanoseconds spent performing 2 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    803442843 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2017-01-16 17:39:47,595 INFO  35 net.mybluemix.asmilk.web.AccountController.save(AccountController.java:50) - account: AbstractAuditingEntity [id=1, version=0]; Account [name=1484559586605]
+2017-01-16 17:39:47,597 DEBUG 35 org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1240) - Rendering view [org.springframework.web.servlet.view.JstlView: name 'account'; URL [/WEB-INF/view/account.jsp]] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,629 TRACE 35 org.springframework.web.servlet.FrameworkServlet.resetContextHolders(FrameworkServlet.java:1060) - Cleared thread-bound request context: SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.context.HttpSessionSecurityContextRepository$Servlet3SaveToSessionRequestWrapper@1a9cda6]
+2017-01-16 17:39:47,630 DEBUG 35 org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) - Successfully completed request
+2017-01-16 17:39:47,630 DEBUG 35 org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:104) - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@19caaed
+2017-01-16 17:39:47,709 DEBUG 36 org.springframework.web.filter.RequestContextFilter.initContextHolders(RequestContextFilter.java:114) - Bound request context to thread: org.apache.catalina.connector.RequestFacade@19caaed
+2017-01-16 17:39:47,710 TRACE 36 org.springframework.web.servlet.FrameworkServlet.initContextHolders(FrameworkServlet.java:1050) - Bound request context to thread: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@19caaed]
+2017-01-16 17:39:47,711 DEBUG 36 org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:861) - DispatcherServlet with name 'dispatcher' processing GET request for [/style/jquery-ui.css]
+2017-01-16 17:39:47,712 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping@1461390] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,716 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping@1055d2a] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,717 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@7cf6e] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,718 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@ca7252] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,718 DEBUG 39 org.springframework.web.filter.RequestContextFilter.initContextHolders(RequestContextFilter.java:114) - Bound request context to thread: org.apache.catalina.connector.RequestFacade@e03ddb
+2017-01-16 17:39:47,719 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@1e90bb3] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,719 TRACE 39 org.springframework.web.servlet.FrameworkServlet.initContextHolders(FrameworkServlet.java:1050) - Bound request context to thread: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@e03ddb]
+2017-01-16 17:39:47,719 DEBUG 39 org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:861) - DispatcherServlet with name 'dispatcher' processing GET request for [/style/style.css]
+2017-01-16 17:39:47,719 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@3718ee] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,720 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping@1461390] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,721 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@19bf387]
+2017-01-16 17:39:47,722 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter@1ca8100]
+2017-01-16 17:39:47,722 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping@1055d2a] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,723 DEBUG 36 org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:947) - Last-Modified value for [/style/jquery-ui.css] is: -1
+2017-01-16 17:39:47,723 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@7cf6e] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,736 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@ca7252] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,737 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@1e90bb3] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,737 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@3718ee] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,737 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@19bf387]
+2017-01-16 17:39:47,737 DEBUG 36 org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1034) - Null ModelAndView returned to DispatcherServlet with name 'dispatcher': assuming HandlerAdapter completed request handling
+2017-01-16 17:39:47,738 TRACE 39 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter@1ca8100]
+2017-01-16 17:39:47,738 TRACE 36 org.springframework.web.servlet.FrameworkServlet.resetContextHolders(FrameworkServlet.java:1060) - Cleared thread-bound request context: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@19caaed]
+2017-01-16 17:39:47,738 DEBUG 39 org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:947) - Last-Modified value for [/style/style.css] is: -1
+2017-01-16 17:39:47,738 DEBUG 36 org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) - Successfully completed request
+2017-01-16 17:39:47,739 DEBUG 36 org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:104) - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@19caaed
+2017-01-16 17:39:47,741 DEBUG 36 org.springframework.web.filter.RequestContextFilter.initContextHolders(RequestContextFilter.java:114) - Bound request context to thread: org.apache.catalina.connector.RequestFacade@19caaed
+2017-01-16 17:39:47,741 TRACE 36 org.springframework.web.servlet.FrameworkServlet.initContextHolders(FrameworkServlet.java:1050) - Bound request context to thread: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@19caaed]
+2017-01-16 17:39:47,742 DEBUG 41 org.springframework.web.filter.RequestContextFilter.initContextHolders(RequestContextFilter.java:114) - Bound request context to thread: org.apache.catalina.connector.RequestFacade@13ac555
+2017-01-16 17:39:47,742 DEBUG 36 org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:861) - DispatcherServlet with name 'dispatcher' processing GET request for [/script/jquery-3.1.1.min.js]
+2017-01-16 17:39:47,742 DEBUG 39 org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1034) - Null ModelAndView returned to DispatcherServlet with name 'dispatcher': assuming HandlerAdapter completed request handling
+2017-01-16 17:39:47,742 TRACE 41 org.springframework.web.servlet.FrameworkServlet.initContextHolders(FrameworkServlet.java:1050) - Bound request context to thread: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@13ac555]
+2017-01-16 17:39:47,742 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping@1461390] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,742 TRACE 39 org.springframework.web.servlet.FrameworkServlet.resetContextHolders(FrameworkServlet.java:1060) - Cleared thread-bound request context: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@e03ddb]
+2017-01-16 17:39:47,742 DEBUG 41 org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:861) - DispatcherServlet with name 'dispatcher' processing GET request for [/script/account.js]
+2017-01-16 17:39:47,742 DEBUG 39 org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) - Successfully completed request
+2017-01-16 17:39:47,743 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping@1055d2a] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,744 DEBUG 39 org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:104) - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@e03ddb
+2017-01-16 17:39:47,744 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@7cf6e] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,743 TRACE 41 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping@1461390] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,744 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@ca7252] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,744 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@1e90bb3] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,745 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@19bf387]
+2017-01-16 17:39:47,745 TRACE 36 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter@1ca8100]
+2017-01-16 17:39:47,745 DEBUG 36 org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:947) - Last-Modified value for [/script/jquery-3.1.1.min.js] is: -1
+2017-01-16 17:39:47,746 TRACE 41 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping@1055d2a] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,747 TRACE 41 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@7cf6e] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,747 TRACE 41 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@ca7252] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,748 TRACE 41 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@1e90bb3] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:47,748 TRACE 41 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@19bf387]
+2017-01-16 17:39:47,748 TRACE 41 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter@1ca8100]
+2017-01-16 17:39:47,749 DEBUG 41 org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:947) - Last-Modified value for [/script/account.js] is: -1
+2017-01-16 17:39:47,753 DEBUG 41 org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1034) - Null ModelAndView returned to DispatcherServlet with name 'dispatcher': assuming HandlerAdapter completed request handling
+2017-01-16 17:39:47,754 TRACE 41 org.springframework.web.servlet.FrameworkServlet.resetContextHolders(FrameworkServlet.java:1060) - Cleared thread-bound request context: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@13ac555]
+2017-01-16 17:39:47,754 DEBUG 41 org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) - Successfully completed request
+2017-01-16 17:39:47,754 DEBUG 41 org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:104) - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@13ac555
+2017-01-16 17:39:47,767 DEBUG 36 org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1034) - Null ModelAndView returned to DispatcherServlet with name 'dispatcher': assuming HandlerAdapter completed request handling
+2017-01-16 17:39:47,768 TRACE 36 org.springframework.web.servlet.FrameworkServlet.resetContextHolders(FrameworkServlet.java:1060) - Cleared thread-bound request context: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@19caaed]
+2017-01-16 17:39:47,768 DEBUG 36 org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) - Successfully completed request
+2017-01-16 17:39:47,769 DEBUG 36 org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:104) - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@19caaed
+2017-01-16 17:39:48,221 DEBUG 42 org.springframework.web.filter.RequestContextFilter.initContextHolders(RequestContextFilter.java:114) - Bound request context to thread: org.apache.catalina.connector.RequestFacade@19caaed
+2017-01-16 17:39:48,222 TRACE 42 org.springframework.web.servlet.FrameworkServlet.initContextHolders(FrameworkServlet.java:1050) - Bound request context to thread: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@19caaed]
+2017-01-16 17:39:48,222 DEBUG 42 org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:861) - DispatcherServlet with name 'dispatcher' processing GET request for [/favicon.ico]
+2017-01-16 17:39:48,222 TRACE 42 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping@1461390] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:48,224 TRACE 42 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping@1055d2a] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:48,225 TRACE 42 org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1117) - Testing handler map [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping@7cf6e] in DispatcherServlet with name 'dispatcher'
+2017-01-16 17:39:48,225 TRACE 42 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@19bf387]
+2017-01-16 17:39:48,225 TRACE 42 org.springframework.web.servlet.DispatcherServlet.getHandlerAdapter(DispatcherServlet.java:1156) - Testing handler adapter [org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter@1ca8100]
+2017-01-16 17:39:48,226 DEBUG 42 org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:947) - Last-Modified value for [/favicon.ico] is: -1
+2017-01-16 17:39:48,232 DEBUG 42 org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1034) - Null ModelAndView returned to DispatcherServlet with name 'dispatcher': assuming HandlerAdapter completed request handling
+2017-01-16 17:39:48,233 TRACE 42 org.springframework.web.servlet.FrameworkServlet.resetContextHolders(FrameworkServlet.java:1060) - Cleared thread-bound request context: FirewalledRequest[ org.apache.catalina.connector.RequestFacade@19caaed]
+2017-01-16 17:39:48,234 DEBUG 42 org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:998) - Successfully completed request
+2017-01-16 17:39:48,235 DEBUG 42 org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:104) - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@19caaed

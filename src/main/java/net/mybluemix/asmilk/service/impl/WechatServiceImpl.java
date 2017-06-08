@@ -27,9 +27,13 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpStatus;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,21 +69,28 @@ import net.mybluemix.asmilk.service.WechatService;
 public class WechatServiceImpl implements WechatService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WechatServiceImpl.class);
+	
+//	private static final String PROXY_HOST = "192.168.10.1";
+//	private static final int PROXY_PORT = 8080;
+//	private static final String PROXY_USERNAME = "zengyd";
+//	private static final String PROXY_PASSWORD = "zengyd123";
 
 	private static final JacksonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-	private static final HttpRequestFactory CLIENT = new ApacheHttpTransport.Builder()
+	/*private static final HttpRequestFactory CLIENT = new ApacheHttpTransport.Builder()
+			.setProxy(new HttpHost(PROXY_HOST, PROXY_PORT))
 			.setSocketFactory(WechatServiceImpl.newDefaultSSLSocketFactory()).build()
 			.createRequestFactory(initializer -> initializer.setConnectTimeout(0).setReadTimeout(0)
 					.setLoggingEnabled(true).setCurlLoggingEnabled(true).setFollowRedirects(true)
 					.setSuppressUserAgentSuffix(true).setParser(JSON_FACTORY.createJsonObjectParser())
 					.setInterceptor(request -> WechatServiceImpl.intercept(request))
-					.setResponseInterceptor(response -> WechatServiceImpl.interceptResponse(response)));
+					.setResponseInterceptor(response -> WechatServiceImpl.interceptResponse(response)));*/
+	private static HttpRequestFactory CLIENT;
 	private static final XPath XPATH = XPathFactory.newInstance().newXPath();
 
 	private static final int RET_OK = 0;
 	private static final String DEFAULT_CHARSET = "UTF-8";
 
-	private static final String URL_LOGIN = "https://login.wx.qq.com";
+	private static final String URL_LOGIN = "http://login.wx.qq.com";
 	private static final String PATH_JSLOGIN = "/jslogin";
 	private static final String PATH_LOGIN = "/cgi-bin/mmwebwx-bin/login";
 	private static final String PATH_INIT = "/webwxinit";
@@ -106,6 +117,24 @@ public class WechatServiceImpl implements WechatService {
 		} catch (ParserConfigurationException e) {
 			LOG.error(e.getMessage(), e.getCause());
 		}
+		
+		ApacheHttpTransport transport = new ApacheHttpTransport.Builder()//.setProxy(new HttpHost(PROXY_HOST, PROXY_PORT))
+				.setSocketFactory(WechatServiceImpl.newDefaultSSLSocketFactory()).build();
+		DefaultHttpClient client = (DefaultHttpClient) transport.getHttpClient();
+//		client.getCredentialsProvider().setCredentials(new AuthScope(PROXY_HOST, PROXY_PORT),
+//				new UsernamePasswordCredentials(PROXY_USERNAME, PROXY_PASSWORD));
+		WechatServiceImpl.CLIENT = transport.createRequestFactory(initializer -> initializer.setConnectTimeout(0)
+				.setReadTimeout(0).setLoggingEnabled(true).setCurlLoggingEnabled(true).setFollowRedirects(true)
+				.setSuppressUserAgentSuffix(true).setParser(JSON_FACTORY.createJsonObjectParser()).setNumberOfRetries(0)
+				.setIOExceptionHandler((request, supportsRetry) -> {
+					LOG.info("!!!!!!######@@@@@@@@IOExceptionHandler@@@@@@@#####!!!!!!");
+					return true;
+				}).setUnsuccessfulResponseHandler((request, response, supportsRetry) -> {
+					LOG.info("!!!!!!######@@@@@@@@UnsuccessfulResponseHandler@@@@@@@#####!!!!!!");
+					return true;
+				}).setThrowExceptionOnExecuteError(true).setInterceptor(request -> WechatServiceImpl.intercept(request))
+				.setResponseInterceptor(response -> WechatServiceImpl.interceptResponse(response)));
+		
 	}
 
 	@Autowired
@@ -287,7 +316,7 @@ public class WechatServiceImpl implements WechatService {
 		String content = IOUtils.toString(is, DEFAULT_CHARSET);
 		LOG.info("content: {}", content);
 
-		String regex = "window.synccheck=\\{retcode:\"(?<retcode>\\d)\",selector:\"(?<selector>\\d)\"\\}";
+		String regex = "window.synccheck=\\{retcode:\"(?<retcode>\\d+?)\",selector:\"(?<selector>\\d+?)\"\\}";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(content);
 
@@ -514,7 +543,7 @@ public class WechatServiceImpl implements WechatService {
 	@Override
 	public void syncCheck() throws IOException {
 		LOG.info("!!!syncCheck:begin!!!");
-		GenericUrl url = new GenericUrl("https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck");
+		GenericUrl url = new GenericUrl("https://webpush.wx2.qq.com/cgi-bin/mmwebwx-bin/synccheck");
 		url.set("skey", requestData.getBaseRequest().getSkey());
 		url.set("sid", requestData.getBaseRequest().getSid());
 		url.set("uin", requestData.getBaseRequest().getUin());
@@ -872,6 +901,8 @@ public class WechatServiceImpl implements WechatService {
 		LOG.info("!!!start:begin!!!");
 		try {
 			switch (status) {
+			case NEW:
+				break;
 			case JSLOGINED:
 				this.login();
 				break;
@@ -896,6 +927,10 @@ public class WechatServiceImpl implements WechatService {
 				break;
 			case DO_FOREX:
 				this.forex();
+				break;
+			case FAILED:
+				break;
+			default:
 				break;
 			}
 		} catch (HttpResponseException e) {

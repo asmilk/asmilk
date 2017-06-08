@@ -4,40 +4,70 @@
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:task="http://www.springframework.org/schema/task" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="
-	http://www.springframework.org/schema/beans classpath:spring-beans-4.2.xsd 
-	http://www.springframework.org/schema/context classpath:spring-context-4.2.xsd 
-	http://www.springframework.org/schema/mvc classpath:spring-mvc-4.2.xsd 
-	http://www.springframework.org/schema/jee classpath:spring-jee-4.2.xsd 
-	http://www.springframework.org/schema/tx classpath:spring-tx-4.2.xsd 
-	http://www.springframework.org/schema/task classpath:spring-task-4.2.xsd 
-	http://www.springframework.org/schema/data/jpa classpath:spring-jpa-1.8.xsd ">
+	http://www.springframework.org/schema/beans classpath:spring-beans-4.3.xsd 
+	http://www.springframework.org/schema/context classpath:spring-context-4.3.xsd 
+	http://www.springframework.org/schema/mvc classpath:spring-mvc-4.3.xsd 
+	http://www.springframework.org/schema/jee classpath:spring-jee-4.3.xsd 
+	http://www.springframework.org/schema/tx classpath:spring-tx-4.3.xsd 
+	http://www.springframework.org/schema/task classpath:spring-task-4.3.xsd 
+	http://www.springframework.org/schema/data/jpa classpath:spring-jpa-1.8.xsd 
+	http://www.springframework.org/schema/security classpath:spring-security-4.2.xsd ">
 
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	<context:component-scan base-package="net.mybluemix.asmilk" />
 	<context:annotation-config />
 
-	<mvc:annotation-driven>
-		<mvc:message-converters>
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="objectMapper" ref="objectMapper" />
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
+	<!-- <mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" /> -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+		p:defaultEncoding="UTF-8">
+		<property name="basenames">
+			<list>
+				<value>classpath:message</value>
+				<value>classpath:org/springframework/security/messages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"
+		p:validationMessageSource-ref="messageSource" />
+
+	<bean id="methodValidationPostProcessor" class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"
+		p:validator-ref="validator" />
 
 	<bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
 		p:indentOutput="true" p:simpleDateFormat="yyyy-MM-dd" />
 
+	<mvc:annotation-driven validator="validator">
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
+				p:objectMapper-ref="objectMapper" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
 	<mvc:resources mapping="/image/**" location="/WEB-INF/image/" cache-period="31556926" />
 	<mvc:resources mapping="/script/**" location="/WEB-INF/script/" cache-period="31556926" />
 	<mvc:resources mapping="/style/**" location="/WEB-INF/style/" cache-period="31556926" />
+	<mvc:resources mapping="/themes/**" location="/WEB-INF/themes/" cache-period="31556926" />
+	<mvc:resources mapping="/locale/**" location="/WEB-INF/locale/" cache-period="31556926" />
+	<mvc:resources mapping="/favicon.ico" location="/WEB-INF/favicon.ico" cache-period="31556926" />
 	<mvc:default-servlet-handler />
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
 
-	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-		p:basename="message" />
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"
+		p:defaultErrorView="error" p:defaultStatusCode="500">
+		<property name="excludedExceptions">
+			<list>
+				<value>javax.validation.ConstraintViolationException</value>
+			</list>
+		</property>
+	</bean>
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
 		p:driverClass="${jdbc.driver}" p:jdbcUrl="${jdbc.url}" p:user="${jdbc.username}" p:password="${jdbc.password}"
@@ -54,7 +84,11 @@
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.generate_statistics">false</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
 			</props>
 		</property>
 	</bean>
@@ -68,8 +102,78 @@
 	<jpa:repositories base-package="net.mybluemix.asmilk.repository"
 		entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
 
+	<bean id="userAuditorAware" class="net.mybluemix.asmilk.auditing.SpringSecurityAuditorAware" />
+
+	<jpa:auditing auditor-aware-ref="userAuditorAware" />
+
 	<task:annotation-driven executor="taskExecutor" scheduler="taskScheduler" />
 	<task:executor id="taskExecutor" pool-size="5" />
 	<task:scheduler id="taskScheduler" pool-size="10" />
+
+
+	<bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<security:authentication-manager alias="authenticationManager"
+		erase-credentials="true">
+		<security:authentication-provider>
+			<security:jdbc-user-service id="userDetailsService" data-source-ref="dataSource" />
+			<security:password-encoder ref="bcryptEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+
+	<bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+		<property name="hierarchy">
+			<value>
+				ROLE_ADMIN > ROLE_USER
+			</value>
+		</property>
+	</bean>
+
+	<bean id="methodSecurityExpressionHandler"
+		class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler"
+		p:roleHierarchy-ref="roleHierarchy" />
+	<security:global-method-security pre-post-annotations="enabled"><!-- secured-annotations="enabled" -->
+		<security:expression-handler ref="methodSecurityExpressionHandler" />
+	</security:global-method-security>
+
+	<bean id="webSecurityExpressionHandler"
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"
+		p:roleHierarchy-ref="roleHierarchy" />
+	<bean id="webExpressionVoter" class="org.springframework.security.web.access.expression.WebExpressionVoter"
+		p:expressionHandler-ref="webSecurityExpressionHandler" />
+
+	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
+		c:loginFormUrl="/index" />
+
+	<bean id="formLoginFilter" class="net.mybluemix.asmilk.security.FormLoginFilter"
+		p:authenticationManager-ref="authenticationManager" p:rememberMeServices-ref="rememberMeServices">
+		<property name="authenticationFailureHandler">
+			<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+				p:defaultFailureUrl="/index" />
+		</property>
+	</bean>
+
+	<security:http pattern="/favicon.ico" security="none" />
+	<security:http pattern="/image/**" security="none" />
+	<security:http pattern="/script/**" security="none" />
+	<security:http pattern="/style/**" security="none" />
+
+	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
+		<security:expression-handler ref="webSecurityExpressionHandler" />
+		<security:intercept-url pattern="/index*" access="permitAll" />
+		<security:intercept-url pattern="/error*" access="permitAll" />
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<security:access-denied-handler error-page="/error" />
+		<security:custom-filter before="FORM_LOGIN_FILTER" ref="formLoginFilter" />
+		<!-- <security:form-login login-page="/index" /> -->
+		<security:remember-me key="netMybluemixAsmilk" services-alias="rememberMeServices"
+			token-validity-seconds="300" user-service-ref="userDetailsService" />
+		<security:csrf disabled="false" />
+		<security:logout delete-cookies="JSESSIONID" invalidate-session="true"
+			logout-success-url="/index" />
+		<security:session-management session-fixation-protection="changeSessionId">
+			<security:concurrency-control max-sessions="1" /><!-- error-if-maximum-exceeded="true" -->
+		</security:session-management>
+	</security:http>
 
 </beans>

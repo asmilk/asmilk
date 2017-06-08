@@ -14,25 +14,27 @@
 		<version.javax.servlet.api>3.1.0</version.javax.servlet.api>
 		<version.javax.servlet.jstl>1.2</version.javax.servlet.jstl>
 
-		<version.mysql>5.1.39</version.mysql>
+		<version.mysql>5.1.40</version.mysql>
 		<version.postgresql>9.3-1104-jdbc4</version.postgresql>
 		<version.derby>10.11.1.1</version.derby>
 
-		<version.slf4j>1.7.21</version.slf4j>
-		<version.log4j>2.6.2</version.log4j>
+		<version.slf4j>1.7.24</version.slf4j>
+		<version.log4j>2.8.2</version.log4j>
 
-		<version.spring.core>4.2.8.RELEASE</version.spring.core>
-		<version.spring.data.jpa>1.10.3.RELEASE</version.spring.data.jpa>
-		<version.hibernate.core>5.0.10.Final</version.hibernate.core>
+		<version.spring.core>4.3.8.RELEASE</version.spring.core>
+		<version.spring.data.jpa>1.11.3.RELEASE</version.spring.data.jpa>
+		<version.spring.security>4.2.2.RELEASE</version.spring.security>
+		<version.hibernate.core>5.2.5.Final</version.hibernate.core>
 
 		<version.google.http.client>1.22.0</version.google.http.client>
 		<version.json.path>2.2.0</version.json.path>
-		<version.jackson>2.1.3</version.jackson>
+		<version.jackson>2.8.6</version.jackson>
 		<version.junit>4.12</version.junit>
+		<version.apache.commons.io>2.5</version.apache.commons.io>
 
-		<version.maven.plugin.war>2.6</version.maven.plugin.war>
-		<version.maven.plugin.compiler>3.5.1</version.maven.plugin.compiler>
-		<version.maven.plugin.surefire>2.19.1</version.maven.plugin.surefire>
+		<version.maven.plugin.compiler>3.6.1</version.maven.plugin.compiler>
+		<version.maven.plugin.war>3.1.0</version.maven.plugin.war>
+		<version.maven.plugin.surefire>2.20</version.maven.plugin.surefire>
 		<skipTests>true</skipTests>
 	</properties>
 
@@ -75,18 +77,27 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${version.slf4j}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-ext</artifactId>
 			<version>${version.slf4j}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${version.log4j}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${version.log4j}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -112,20 +123,47 @@
 			<version>${version.spring.core}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${version.spring.core}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${version.spring.data.jpa}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${version.hibernate.core}</version>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${version.spring.security}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${version.spring.security}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>${version.hibernate.core}</version>
+		</dependency>		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
 			<version>${version.hibernate.core}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${version.hibernate.core}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>${version.hibernate.core}</version>
 		</dependency>
 
 		<dependency>
@@ -139,11 +177,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
+			<version>${version.apache.commons.io}</version>
 		</dependency>
 
 		<dependency>
@@ -152,6 +190,11 @@
 			<version>${version.json.path}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${version.jackson}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -179,19 +222,19 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${version.maven.plugin.surefire}</version>
-				<configuration>
-					<skipTests>${skipTests}</skipTests>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${version.maven.plugin.war}</version>
 				<configuration>
 					<warName>${project.artifactId}</warName>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version.maven.plugin.surefire}</version>
+				<configuration>
+					<skipTests>${skipTests}</skipTests>
 				</configuration>
 			</plugin>
 		</plugins>
