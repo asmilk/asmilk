@@ -896,7 +896,7 @@ public class WechatServiceImpl implements WechatService {
 	}
 
 	@Override
-	@Scheduled(fixedDelay = 1000)
+//	@Scheduled(fixedDelay = 1000)
 	public void start() throws IOException, XPathExpressionException, SAXException {
 		LOG.info("!!!start:begin!!!");
 		try {
